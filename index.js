@@ -1,15 +1,18 @@
 // Button
 // all class with drum    loop through i   add eventlisten to i
 var numDrum = (document.querySelectorAll(".drum").length);
+
 for (var i = 0; i < numDrum; i++) {
   document.querySelectorAll(".drum")[i].addEventListener("click", function() {
     var buttonInnerHTML = this.innerHTML;
     makeSound(buttonInnerHTML);
+    buttonAnimation(buttonInnerHTML);
   });
 }
 
 document.addEventListener("keydown", function(event) {
   makeSound(event.key);
+  buttonAnimation(event.key);
 });
 
 function makeSound(key) {
@@ -46,4 +49,12 @@ function makeSound(key) {
       consol.log("WRONG");
   }
 
+}
+
+function buttonAnimation(key) {
+  var activeBotton = document.querySelector("." + key);
+  activeBotton.classList.add("pressed");
+  setTimeout(function(){
+    activeBotton.classList.remove("pressed");
+  }, 100);
 }
